@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Mechanical Completion Inspection</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      color: #000;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .sub-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .paragraf {
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: normal;
+    }
+
+    .header-box {
+      border: 1px solid #000;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .header-row div {
+      width: 48%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+
+    table, th, td {
+      border: 1px solid #000;
+    }
+
+    th {
+      background: #f2f2f2;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+    }
+
+    td {
+      padding: 4px;
+    }
+
+    .center {
+      text-align: center;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 7px;
+      justify-content: center;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .header img {
+      width: 220px;
+    }
+
+    .tag-title {
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    img {
+      width: 200px;
+      margin-top: 10px;
+      justify-items: center;
+      align-items: center;
+    }
+
+   .header-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 20px;
+    }
+
+  .header-item {
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .signature-section {
+      margin-top: 40px;
+    }
+
+    .signature-table {
+      width: 100%;
+      border: none;
+    }
+
+    .signature-table td {
+      border: none;
+      width: 33%;
+      vertical-align: top;
+      text-align: center;
+      /* padding-top: 30px; */
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img class="logo"
+      src="https://i.ibb.co.com/GfQhqyY9/mechanical-completion.png"
+      alt="Company Logo" />
+  </div>
+  <h1>MECHANICAL COMPLETION</h1>
+  <div class="sub-title">
+    MC Inspection & Test Record
+  </div>
+
+  <div class="paragraf">
+     <%= header?.submission_id || '-' %> -  <%= header?.project_name || '-' %>
+  </div>
+
+  <!-- HEADER INFORMATION -->
+  <div class="header-box">
+
+  <div class="header-grid">
+
+    <div class="header-item">
+      <strong>Drawing No :</strong> <%= header?.drawing_no || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Discipline :</strong> <%= header?.discipline || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Company :</strong> <%= header?.company_name || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Subsystem :</strong> <%= header?.subsystem || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Project :</strong> <%= header?.project_name || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>System :</strong> <%= header?.system || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Model No :</strong> <%= header?.model_no || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Serial No :</strong> <%= header?.serial_no || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Manufacturer :</strong> <%= header?.manufacturer || '-' %>
+    </div>
+
+    <div class="header-item">
+      <strong>Location :</strong> <%= header?.location || '-' %>
+    </div>
+  </div>
+
+</div>
+
+  <!-- LOOP PER TAG NUMBER -->
+  <% if (Array.isArray(groupedData)) { %>
+    <% groupedData.forEach(tag => { %>
+
+      <div class="tag-title">
+        Tag Number: <%= tag.tag_number %>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:50px;">Item</th>
+            <th>Description</th>
+            <th style="width:40px;">OK</th>
+            <th style="width:40px;">NA</th>
+            <th style="width:40px;">PL</th>
+            <th style="width:150px;">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tag.items.forEach(item => { %>
+            <tr>
+              <td class="center"><%= item.item_no %></td>
+              <td class="left"><%= item.description %></td>
+              <td class="center"><%= item.result === "OK" ? "✔" : "-" %></td>
+              <td class="center"><%= item.result === "NA" ? "✔" : "-" %></td>
+              <td class="center"><%= item.result === "PL" ? "✔" : "-" %></td>
+              <td class="left"><%= item.remarks || "-" %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+    <% }) %>
+  <% } %>
+
+  
+  
+</body>
+</html>
+
+<!-- SIGNATURE -->
+

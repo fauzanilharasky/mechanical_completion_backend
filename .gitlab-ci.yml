@@ -1,0 +1,11 @@
+stages:
+  - ticket
+      
+ticket-job:
+  stage: ticket
+  script:
+    - echo "Compiling the code...."
+    - echo "$CI_COMMIT_SHA"
+    - |
+      curl -k --data "{\"message\":\"$CI_COMMIT_SHA\", \"id_project\":\"$CI_PROJECT_ID\"}" -H 'Content-Type: application/json' -X POST $HOST_TICKET_API
+    - echo "Compile complete."

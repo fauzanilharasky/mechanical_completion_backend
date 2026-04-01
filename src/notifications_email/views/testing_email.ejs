@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    th {
+      background: #f4f4f4;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>RFI TRANSMITTAL <%= submission_no %></h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>System</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% list.forEach((row, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= row.system %></td>
+          <td><%= row.legend_inspection_auth %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <p>Status: <%= status %></p>
+
+</body>
+</html>
